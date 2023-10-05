@@ -5,6 +5,7 @@ from datetime import datetime
 
 
 def do_pack():
+    """ packs web_static/ folder preparing for deployment """
     date = datetime.now().strftime("%Y%m%d%H%M%S")
     local("mkdir -p versions/")
     path = f"versions/web_static_{date}.tgz"
