@@ -1,3 +1,4 @@
+# 5. Puppet for setup
 file { '/data/web_static/shared/':
   ensure  => directory,
   recurse => true,
