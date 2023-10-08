@@ -22,18 +22,17 @@ def do_deploy(archive_path):
     ''' deploy the web_static archive to the servers '''
     if not os.path.exists(archive_path):
         return False
-    try:
-        put(archive_path, "/tmp/")
-        filename = archive_path.split("/")[-1]
-        release = "/data/web_static/releases/{}".format(filename.split(".")[0])
-        run("mkdir -p {}".format(release))
-        run("tar -xzf /tmp/{} -C {}".format(filename, release))
-        run("rm /tmp/{}".format(filename))
-        run("mv {}/web_static/* {}".format(release, release))
-        run("rm -rf {}/web_static".format(release))
-        run("rm -rf /data/web_static/current")
-        run("ln -s {} /data/web_static/current".format(release))
-
-        return True
-    except:
+    if put(archive_path, '/tmp/').failed:
         return False
+    name = archive_path.rsplit('/', 1)[-1]
+    with cd('/tmp/'):
+        if sudo(f'tar -xzf {name} web_static').failed:
+            return False
+        if sudo(f'rm {name}').failed:
+            return False
+    dir = name.removesuffix('.tgz')
+    if sudo(f'mv /tmp/{name} /data/web_static/releases/{dir}').failed:
+        return False
+    if sudo(f'ln -sf /data/web_static/releases/{dir} /data/web_static/current').failed:
+        return False
+    return True
