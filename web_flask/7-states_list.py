@@ -15,5 +15,11 @@ def states_list():
         states=sorted(storage.all(State).values(), key=lambda s: s.name))
 
 
+@app.teardown_appcontext
+def clean(exception):
+    """ Removes the SQLAlchemy session """
+    storage.close()
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
