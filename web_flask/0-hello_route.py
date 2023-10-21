@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 """ 0. Hello Flask! """
 from flask import Flask
-import flask
 
 app = Flask(__name__)
 
