@@ -62,3 +62,7 @@ class FileStorage:
                 if value is obj:
                     del FileStorage.__objects[key]
                     return
+
+    def close(self):
+        """ closes and cleans after FileStorage """
+        self.reload()
