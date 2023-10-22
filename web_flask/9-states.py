@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 
 @app.route('/states', strict_slashes=False)
-@app.route('/states/<uuid:id>', strict_slashes=False)
+@app.route('/states/<id>', strict_slashes=False)
 def states_list(id=None):
     ''' This function Handles the "/states/<id>" route '''
     template = '9-states.html'
