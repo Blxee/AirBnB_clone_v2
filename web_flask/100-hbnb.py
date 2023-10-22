@@ -1,20 +1,25 @@
 #!/usr/bin/python3
-''' 11. HBNB filters '''
+''' Module for 12. HBNB is alive! task '''
 from flask import Flask, render_template
 from models import storage
 from models.amenity import Amenity
+from models.place import Place
 from models.state import State
 
 app = Flask(__name__)
 
 
-@app.route('/hbnb_filters', strict_slashes=False)
-def hbnb_filters():
-    ''' This function Handles the "/hbnb_filters" route '''
-    template = '10-hbnb_filters.html'
+@app.route('/hbnb', strict_slashes=False)
+def hbnb():
+    ''' This function Handles the "/hbnb" route '''
+    template = '100-hbnb.html'
     states = storage.all(State).values()
     amenities = storage.all(Amenity).values()
-    return render_template(template, states=states, amenities=amenities)
+    places = storage.all(Place).values()
+    return render_template(template,
+                           states=states,
+                           amenities=amenities,
+                           places=places)
 
 
 @app.teardown_appcontext
