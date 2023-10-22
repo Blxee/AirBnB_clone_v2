@@ -12,7 +12,7 @@ def states_list():
     ''' This function Handles the "/cities_by_states" route '''
     return render_template(
         '8-cities_by_states.html',
-        states=sorted(storage.all(State).values(), key=lambda s: s.name))
+        states=storage.all(State).values())
 
 
 @app.teardown_appcontext
